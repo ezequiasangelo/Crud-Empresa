@@ -2,11 +2,28 @@
 
 include('../config/config.php');
 
-header('Content-Type: application/json'); 
+header('Content-Type: application/json');
 
 $data = json_decode(file_get_contents("php://input"));
 
-if (!isset($data->cpf) || !isset($data->nome) || !isset($data->sobrenome) || !isset($data->email) || !isset($data->cracha)) {
+
+if (isset($_FILES['foto']) && $_FILES['foto']['error'] == UPLOAD_ERR_OK) {
+    $fotoTmp = $_FILES['foto']['tmp_name'];
+    $fotoNome = $_FILES['foto']['name'];
+    $fotoDestino = 'uploads/' . $fotoNome;
+
+    if (move_uploaded_file($fotoTmp, $fotoDestino)) {
+        $foto = $fotoDestino;
+    } else {
+        echo json_encode(['error' => 'Falha ao fazer upload da foto.']);
+        exit;
+    }
+} else {
+    $foto = '';
+}
+
+
+if (!isset($data->cpf) || !isset($data->nome) || !isset($data->sobrenome) || !isset($data->email) || !isset($data->cracha) || !isset($data->data_nascimento)) {
     echo json_encode(['error' => 'Por favor, preencha todos os campos antes de continuar.']);
     exit;
 }
@@ -31,15 +48,25 @@ try {
         exit;
     }
 
+    $dataNascimento = DateTime::createFromFormat('d/m/Y', $data->data_nascimento);
+    if ($dataNascimento) {
+        $data_nascimento = $dataNascimento->format('Y-m-d');
+    } else {
+        echo json_encode(['error' => 'Formato de data inválido.']);
+        exit;
+    }
 
-    $sqlInsert = "INSERT INTO funcionarios (cpf, nome, sobrenome, email, cracha, isdeleted) 
-                  VALUES (:cpf, :nome, :sobrenome, :email, :cracha, false)";
+
+    $sqlInsert = "INSERT INTO funcionarios (cpf, nome, sobrenome, email, cracha, data_nascimento, foto) 
+    VALUES (:cpf, :nome, :sobrenome, :email, :cracha, :data_nascimento, :foto)";
     $stmtInsert = $pdo->prepare($sqlInsert);
     $stmtInsert->bindParam(':cpf', $data->cpf);
     $stmtInsert->bindParam(':nome', $data->nome);
     $stmtInsert->bindParam(':sobrenome', $data->sobrenome);
     $stmtInsert->bindParam(':email', $data->email);
     $stmtInsert->bindParam(':cracha', $data->cracha);
+    $stmtInsert->bindParam(':data_nascimento', $data->data_nascimento);
+    $stmtInsert->bindParam(':foto', $data->foto);
 
     if ($stmtInsert->execute()) {
         echo json_encode(['message' => 'Funcionário cadastrado com sucesso!']);

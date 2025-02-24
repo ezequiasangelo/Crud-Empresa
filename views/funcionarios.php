@@ -15,6 +15,11 @@
             Cadastrar Funcionário
         </button>
 
+        <div class="mb-3">
+            <input type="text" id="pesquisa" class="form-control" placeholder="Pesquisar funcionários...">
+        </div>
+
+
         <?php include 'modal_cadastro.php'; ?>
         <?php include 'modal_editar.php'; ?>
 
@@ -22,10 +27,12 @@
             <table class="table table-striped">
                 <thead class="table-dark">
                     <tr>
+                        <th>Foto</th>
                         <th>CPF</th>
                         <th>Nome</th>
                         <th>Sobrenome</th>
                         <th>Email</th>
+                        <th>Data de Nascimento</th>
                         <th>Crachá</th>
                         <th>Ações</th>
                     </tr>

@@ -7,8 +7,7 @@ if (isset($_GET['cpf'])) {
     $cpf = $_GET['cpf'];
 
     try {
-
-        $sql = "SELECT cpf, nome, sobrenome, email, cracha FROM funcionarios WHERE cpf = :cpf AND isdeleted = FALSE";
+        $sql = "SELECT cpf, nome, sobrenome, email, cracha, data_nascimento, foto FROM funcionarios WHERE cpf = :cpf AND isdeleted = FALSE";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':cpf', $cpf);
         $stmt->execute();
@@ -26,8 +25,7 @@ if (isset($_GET['cpf'])) {
 } else {
 
     try {
-
-        $sql = "SELECT cpf, nome, sobrenome, email, cracha FROM funcionarios WHERE isdeleted = FALSE";
+        $sql = "SELECT cpf, nome, sobrenome, email, cracha, data_nascimento, foto FROM funcionarios WHERE isdeleted = FALSE";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
 

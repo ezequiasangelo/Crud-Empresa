@@ -8,6 +8,10 @@
             <div class="modal-body">
                 <form id="formFuncionarioEditar">
                     <div class="mb-3">
+                        <label for="fotoEditar" class="form-label">Foto</label>
+                        <input type="file" class="form-control" id="fotoEditar" accept="image/*">
+                    </div>
+                    <div class="mb-3">
                         <label for="cpfEditar" class="form-label">CPF</label>
                         <input type="text" class="form-control" id="cpfEditar" required>
                     </div>
@@ -22,6 +26,10 @@
                     <div class="mb-3">
                         <label for="emailEditar" class="form-label">Email</label>
                         <input type="email" class="form-control" id="emailEditar" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="data_nascimentoEditar" class="form-label">Data de Nascimento</label>
+                        <input type="date" class="form-control" id="data_nascimentoEditar" required>
                     </div>
                     <div class="mb-3">
                         <label for="crachaEditar" class="form-label">Crachá</label>
