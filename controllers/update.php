@@ -32,11 +32,11 @@ if (isset($_FILES['foto']) && $_FILES['foto']['error'] == 0) {
     $uploadFile = $uploadDir . $fotoName;
 
     if (move_uploaded_file($foto['tmp_name'], $uploadFile)) {
-        // Salve o caminho do arquivo no banco de dados
+        
         $sql = "UPDATE funcionarios SET nome = :nome, sobrenome = :sobrenome, email = :email, cracha = :cracha, data_nascimento = :data_nascimento, foto = :foto WHERE cpf = :cpf";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':foto', $fotoName);
-        // Adicione os outros binds
+
     } else {
         echo json_encode(['error' => 'Erro ao salvar a foto.']);
         exit;
