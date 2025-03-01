@@ -1,8 +1,8 @@
-## Visão Geral
+##  Visão Geral
 
- **Sistema de Gestão de Funcionários** foi projetado para tornar a administração de colaboradores mais eficiente e organizada. Com uma interface intuitiva e moderna, ele permite o cadastro, edição, exclusão e consulta de funcionários de maneira ágil e segura, otimizando a gestão e melhorando o fluxo de trabalho dentro da empresa.
+O **Sistema de Gestão de Funcionários** foi projetado para tornar a administração de colaboradores mais eficiente e organizada. Com uma interface intuitiva e moderna, ele permite o cadastro, edição, exclusão e consulta de funcionários de maneira ágil e segura, otimizando a gestão e melhorando o fluxo de trabalho dentro da empresa.
 
-### Principais Funcionalidades
+###  Principais Funcionalidades
 -  Cadastro de funcionários
 -  Edição de informações
 -  Exclusão lógica de registros
@@ -14,7 +14,8 @@
 
 Confira abaixo uma prévia do funcionamento do sistema:
 
-[Demonstração do Projeto - ](assets/img/Vídeo-sem-título-‐-Feito-com-o-Clipchamp.gif)
+![Demonstração do Projeto](assets/img/video.gif)
+
 
 ## 💻 Tecnologias
 
@@ -27,7 +28,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 -  **Composer**
 -  **Cloudinary**
 
-## Como Executar o Projeto
+## ⚙️ Como Executar o Projeto
 
 ### 1️⃣ Clone o repositório:
 
@@ -79,6 +80,21 @@ Para garantir o funcionamento correto do sistema, instale o **Composer** e o **C
    composer require cloudinary/cloudinary_php
    ```
 3. Configure suas credenciais no arquivo `config/config.php`
+
+### 🔧 Configurando o `php.ini`
+
+Para evitar problemas de compatibilidade e garantir que o PostgreSQL funcione corretamente, edite o arquivo `php.ini` e descomente ou adicione as seguintes linhas:
+
+1. Habilite a exibição de erros, mas sem avisos de funções obsoletas:
+   ```ini
+   error_reporting = E_ALL & ~E_DEPRECATED
+   ```
+2. Ative as extensões do PostgreSQL:
+   ```ini
+   extension=pgsql
+   extension=pdo_pgsql
+   ```
+3. Reinicie o servidor Apache para aplicar as alterações.
 
 Acesse a aplicação pelo navegador:
 
