@@ -1,40 +1,16 @@
 <?php
 
 include('../config/config.php');
+include('../functions/read_employee.php');
+
+header('Content-Type: application/json');
 
 if (isset($_GET['cpf'])) {
-
     $cpf = $_GET['cpf'];
-
-    try {
-
-        $sql = "SELECT cpf, nome, sobrenome, email, cracha FROM funcionarios WHERE cpf = :cpf AND isdeleted = FALSE";
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':cpf', $cpf);
-        $stmt->execute();
-
-        $funcionario = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($funcionario) {
-            echo json_encode($funcionario);
-        } else {
-            echo json_encode(['error' => 'Funcionário não encontrado.']);
-        }
-    } catch (PDOException $e) {
-        echo json_encode(['error' => 'Erro ao buscar dados: ' . $e->getMessage()]);
-    }
+    $response = buscarFuncionario($pdo, $cpf);
+    echo json_encode($response);
 } else {
-
-    try {
-
-        $sql = "SELECT cpf, nome, sobrenome, email, cracha FROM funcionarios WHERE isdeleted = FALSE";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute();
-
-        $funcionarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        echo json_encode($funcionarios);
-    } catch (PDOException $e) {
-        echo json_encode(['error' => 'Erro ao buscar funcionários: ' . $e->getMessage()]);
-    }
+    $response = buscarFuncionario($pdo);
+    echo json_encode($response);
 }
+?>
