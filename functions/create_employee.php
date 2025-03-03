@@ -11,7 +11,7 @@ function cadastrarFuncionario($pdo, $data) {
     
     if ($existing) {
         if ($existing['isdeleted'] == FALSE) {
-            $mensagemErro = 'CPF já cadastrado e não excluído.';
+            $mensagemErro = 'CPF ja cadastrado por favor digite outro CPF valido.';
             return ['error' => $mensagemErro];
         } else {
             $sqlReativar = "UPDATE funcionarios 
@@ -31,7 +31,7 @@ function cadastrarFuncionario($pdo, $data) {
             $stmtReativar->bindParam(':data_nascimento', $data->data_nascimento);
             $stmtReativar->execute();
             
-            $mensagemSucesso = 'CPF reativado e cadastro atualizado.';
+            $mensagemSucesso = 'Cadastrado com sucesso.';
             return ['message' => $mensagemSucesso];
         }
     }
