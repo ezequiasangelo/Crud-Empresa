@@ -12,7 +12,7 @@ O **Sistema de Gestão de Funcionários** foi projetado para tornar a administra
 
 ## 🎥 Demonstração
 
-Confira abaixo uma prévia do funcionamento do sistema:
+Confira abaixo uma prévia das funcionalidades presentes no sistema:
 
 ![Demonstração do Projeto](assets/img/video.gif)
 
@@ -74,12 +74,12 @@ Para garantir o funcionamento correto do sistema, instale o **Composer** e o **C
    ```
 
 🔹 **Instalando o Cloudinary**
-1. Crie uma conta gratuita em: [cloudinary.com](https://cloudinary.com/)
-2. Instale o SDK do Cloudinary via Composer:
+
+1. Instale o SDK do Cloudinary via Composer:
    ```bash
    composer require cloudinary/cloudinary_php
    ```
-3. Configure suas credenciais no arquivo `config/config.php`
+2. Configure suas credenciais no arquivo `config/config.php`
 
 ### 🔧 Configurando o `php.ini`
 
@@ -95,6 +95,11 @@ Para evitar problemas de compatibilidade e garantir que o PostgreSQL funcione co
    extension=pdo_pgsql
    ```
 3. Reinicie o servidor Apache para aplicar as alterações.
+
+Inicie a aplicação 
+   ```bash
+   php -S localhost:'SEU SERVIDOR'
+   ```
 
 Acesse a aplicação pelo navegador:
 
